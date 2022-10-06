@@ -1,0 +1,50 @@
+from lib2to3.pytree import Base
+from typing import Optional
+from pydantic import BaseModel, Field
+import datetime
+
+
+class PatientSchema(BaseModel):
+    name: str = Field(...)
+    age: int = Field(...)
+    main_diagnosis: str = Field(...)
+    date_of_birth: str = Field(...)
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "name": "Harry Potter",
+                "age": 30,
+                "main_diagnosis": "Headache",
+                "date_of_birth": "1980-07-31",
+            }
+        }
+
+
+class UpdatePatientModel(BaseModel):
+    name: Optional[str]
+    age: Optional[int]
+    main_diagnosis: Optional[str]
+    date_of_birth: Optional[str]
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "name": "Harry Potter",
+                "age": 30,
+                "main_diagnosis": "Headache",
+                "date_of_birth": "1980-07-31",
+            }
+        }
+
+
+def ResponseModel(data, message):
+    return {
+        "data": [data],
+        "code": 200,
+        "message": message,
+    }
+
+
+def ErrorResponseModel(error, code, message):
+    return {"error": error, "code": code, "message": message}
