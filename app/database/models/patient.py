@@ -1,7 +1,5 @@
-from lib2to3.pytree import Base
 from typing import Optional
 from pydantic import BaseModel, Field
-import datetime
 
 
 class PatientSchema(BaseModel):
@@ -40,7 +38,7 @@ class UpdatePatientModel(BaseModel):
 
 def ResponseModel(data, message):
     return {
-        "data": [data],
+        "payload": data,
         "code": 200,
         "message": message,
     }
