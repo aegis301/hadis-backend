@@ -7,7 +7,7 @@ app = FastAPI()
 app.include_router(PatientRouter, tags=["Patient"], prefix="/patient")
 
 
-origins = ["http://localhost:3000", "http://localhost:8000"]
+origins = ["http://localhost:3000", "localhost:3000"]
 
 app.add_middleware(
     CORSMiddleware,
