@@ -50,7 +50,7 @@ async def update_patient(id: str, data: dict):
 async def delete_patient(id: str):
     patient = await patients_collection.find_one({"_id": ObjectId(id)})
     if patient:
-        patients.delete_one({"_id": ObjectId(id)})
+        patient.delete_one({"_id": ObjectId(id)})
         return True
 
 
