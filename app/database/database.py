@@ -48,10 +48,13 @@ async def update_patient(id: str, data: dict):
 
 # Delete a patient from the database
 async def delete_patient(id: str):
-    patient = await patients_collection.find_one({"_id": ObjectId(id)})
-    if patient:
-        patient.delete_one({"_id": ObjectId(id)})
+    try:
+        patient = await patients_collection.delete_one({"_id": ObjectId(id)})
+        print(f"Successfully deleted patient {patient.id} from database")
         return True
+    except:
+        print("Failed to delete patient")
+        return False
 
 
 # helpers

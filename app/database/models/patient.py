@@ -36,11 +36,12 @@ class UpdatePatientModel(BaseModel):
         }
 
 
-def ResponseModel(data, message):
+def ResponseModel(data, message, headers):
     return {
         "payload": data,
         "code": 200,
         "message": message,
+        "headers": headers,
     }
 
 
