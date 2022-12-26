@@ -25,5 +25,14 @@ def test_delete_patient(id):
         return False
 
 
+def test_update_patient(id, data):
+    # Update a patient with a matching ID
+    try:
+        patients_collection.update_one({"_id": ObjectId(id)}, {"$set": data})
+    except:
+        print("Failed to update patient")
+        return False
+
+
 if __name__ == "__main__":
     test_delete_patient(test_patient)
