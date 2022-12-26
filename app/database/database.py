@@ -58,8 +58,6 @@ async def delete_patient(id: str):
 
 
 # helpers
-
-
 def patient_helper(patient) -> dict:
     return {
         "id": str(patient["_id"]),
