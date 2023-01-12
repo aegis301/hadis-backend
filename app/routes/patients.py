@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Body
 from fastapi.encoders import jsonable_encoder
 
-from app.database.database import (
+from app.database.patients import (
     add_patient,
     delete_patient,
     retrieve_patients,
