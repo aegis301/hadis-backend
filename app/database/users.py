@@ -37,7 +37,7 @@ async def create_single_user(data: dict):
 
 
 async def authenticate_user(form_data):
-    user = await users_collection.find_one(form_data.username, None)
+    user = await users_collection.find_one({"username": form_data.username})
     if user is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -51,6 +51,6 @@ async def authenticate_user(form_data):
         )
 
     return {
-        "access_token": create_access_token(data={"sub": user["username"]}),
-        "refresh_token": create_refresh_token(data={"sub": user["username"]}),
+        "access_token": create_access_token(user["username"]),
+        "refresh_token": create_refresh_token(user["username"]),
     }
