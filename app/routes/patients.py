@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Body
 from fastapi.encoders import jsonable_encoder
 
-from app.database.database import (
+from app.database.patients import (
     add_patient,
     delete_patient,
     retrieve_patients,
@@ -9,11 +9,11 @@ from app.database.database import (
     update_patient,
 )
 from app.database.models.patient import (
-    ErrorResponseModel,
-    ResponseModel,
     PatientSchema,
     UpdatePatientModel,
 )
+
+from app.database.models.default import ResponseModel, ErrorResponseModel
 
 router = APIRouter()
 
