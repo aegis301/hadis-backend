@@ -1,8 +1,11 @@
 from typing import Optional
 from pydantic import BaseModel, Field
+from .default import PydanticObjectId
 
 
 class NewPatient(BaseModel):
+    """New patient model"""
+
     name: str = Field(...)
     age: int = Field(...)
     main_diagnosis: str = Field(...)
@@ -20,6 +23,8 @@ class NewPatient(BaseModel):
 
 
 class UpdatePatient(BaseModel):
+    """Fields to update an existing patient"""
+
     name: Optional[str]
     age: Optional[int]
     main_diagnosis: Optional[str]
@@ -34,3 +39,9 @@ class UpdatePatient(BaseModel):
                 "date_of_birth": "1980-07-31",
             }
         }
+
+
+class Patient(NewPatient):
+    """NewPatient + id field"""
+
+    id: PydanticObjectId = Field(..., alias="_id")
