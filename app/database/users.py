@@ -8,15 +8,7 @@ from ..utils.auth import (
     create_refresh_token,
     verify_password,
 )
-
-
-MONGO_DETAILS = "mongodb://localhost:27017"
-
-client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_DETAILS)
-
-database = client.hadis
-
-users_collection = database.get_collection("user")
+from .db import users_collection
 
 
 async def create_single_user(data: dict):

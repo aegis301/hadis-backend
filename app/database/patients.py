@@ -1,14 +1,7 @@
 import motor.motor_asyncio
 from bson.objectid import ObjectId
+from .db import patients_collection
 
-
-MONGO_DETAILS = "mongodb://localhost:27017"
-
-client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_DETAILS)
-
-database = client.hadis
-
-patients_collection = database.get_collection("patient")
 
 # retrieve all patients in the database
 async def retrieve_patients():
