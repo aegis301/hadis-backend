@@ -4,7 +4,7 @@ from .db import patients_collection
 
 
 # retrieve all patients in the database
-async def retrieve_patients():
+async def fetch_patients():
     patients = []
     async for patient in patients_collection.find():
         patients.append(patient_helper(patient))
@@ -18,7 +18,7 @@ async def add_patient(patient_data: dict) -> dict:
 
 
 # Retrieve a patient with a matching ID
-async def retrieve_patient(id: str) -> dict:
+async def fetch_patient(id: str) -> dict:
     patient = await patients_collection.find_one({"_id": ObjectId(id)})
     if patient:
         return patient_helper(patient)

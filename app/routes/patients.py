@@ -4,8 +4,8 @@ from fastapi.encoders import jsonable_encoder
 from app.database.patients import (
     add_patient,
     delete_patient,
-    retrieve_patients,
-    retrieve_patient,
+    fetch_patients,
+    fetch_patient,
     update_patient,
 )
 from app.database.models.patient import (
@@ -29,7 +29,7 @@ async def add_patient_data(patient: NewPatient = Body(...)):
 
 @router.get("/", response_description="Patients retrieved")
 async def get_patients():
-    patients = await retrieve_patients()
+    patients = await fetch_patients()
     if patients:
         return ResponseModel(patients, "Patients data retrieved successfully", headers)
     return ResponseModel(patients, "Empty list returned", headers)
@@ -37,7 +37,7 @@ async def get_patients():
 
 @router.get("/{id}", response_description="Patient data retrieved")
 async def get_patient_data(id):
-    patient = await retrieve_patient(id)
+    patient = await fetch_patient(id)
     if patient:
         return ResponseModel(patient, "Patient data retrieved successfully", headers)
     return ResponseModel("An error occurred.", 404, "Patient does not exist.")
