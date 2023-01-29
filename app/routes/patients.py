@@ -9,8 +9,8 @@ from app.database.patients import (
     update_patient,
 )
 from app.database.models.patient import (
-    PatientSchema,
-    UpdatePatientModel,
+    NewPatient,
+    UpdatePatient,
 )
 
 from app.database.models.default import ResponseModel, ErrorResponseModel
@@ -21,7 +21,7 @@ headers = {"Access-Control-Allow-Origin": "*"}
 
 
 @router.post("/", response_description="Patient data added into the database")
-async def add_patient_data(patient: PatientSchema = Body(...)):
+async def add_patient_data(patient: NewPatient = Body(...)):
     patient = jsonable_encoder(patient)
     new_patient = await add_patient(patient)
     return ResponseModel(new_patient, "Patient added successfully.", headers)
@@ -44,7 +44,7 @@ async def get_patient_data(id):
 
 
 @router.put("/{id}")
-async def update_patient_data(id: str, req: UpdatePatientModel = Body(...)):
+async def update_patient_data(id: str, req: UpdatePatient = Body(...)):
     req = {k: v for k, v in req.dict().items() if v is not None}
     updated_patient = await update_patient(id, req)
     if updated_patient:

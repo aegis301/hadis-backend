@@ -2,7 +2,7 @@ from typing import Optional
 from pydantic import BaseModel, Field
 
 
-class PatientSchema(BaseModel):
+class NewPatient(BaseModel):
     name: str = Field(...)
     age: int = Field(...)
     main_diagnosis: str = Field(...)
@@ -19,7 +19,7 @@ class PatientSchema(BaseModel):
         }
 
 
-class UpdatePatientModel(BaseModel):
+class UpdatePatient(BaseModel):
     name: Optional[str]
     age: Optional[int]
     main_diagnosis: Optional[str]
