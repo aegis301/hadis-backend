@@ -1,11 +1,17 @@
 from fastapi import FastAPI
 from fastapi.security import OAuth2PasswordBearer
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi_login import LoginManager
 from .routes.patients import router as PatientRouter
 from .routes.users import router as UserRouter
+from dotenv import load_dotenv
+import os
 
-
+load_dotenv()
 app = FastAPI()
+
+SECRET = os.getenv("JWT_SECRET_KEY")
+manager = LoginManager(SECRET, "/user/login", use_cookie=True)
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
